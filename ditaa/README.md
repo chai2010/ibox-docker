@@ -27,7 +27,7 @@ $ cat << EOF > simple.txt
 EOF
 
 # generate png file
-$ docker run --rm -it  -v `pwd`:/root chai2010/ditaa simple.txt output.png 
+$ docker run --rm -it  -v `pwd`:/root chai2010/ibox:ditaa simple.txt output.png
 ```
 
 Output:

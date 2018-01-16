@@ -12,11 +12,11 @@ This docker container does this for you. And allows you to pipe by default into 
 ## Usage
 
 ```
-cat test.uml | docker run --rm -i chai2010/plantuml > test.svg
+cat test.uml | docker run --rm -i chai2010/ibox:plantuml > test.svg
 ```
 
 The default will output svg. If png output is wanted, call it like this:
 
 ```
-cat test.uml | docker run --rm -i chai2010/plantuml -tpng > test.png
+cat test.uml | docker run --rm -i chai2010/ibox:plantuml -tpng > test.png
 ```

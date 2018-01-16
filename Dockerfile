@@ -4,18 +4,21 @@
 
 FROM golang:1.9.2-alpine3.6 as builder
 
-RUN apk add --no-cache git curl openssl
+RUN apk add --no-cache git curl openssl gcc
 
 RUN go get github.com/golang/protobuf/protoc-gen-go
 RUN go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 RUN go get github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 RUN go get github.com/mwitkow/go-proto-validators/protoc-gen-govalidators
 
-RUN go get github.com/coreos/etcd
 RUN go get github.com/kelseyhightower/confd
 RUN go get github.com/yunify/metad
 
-RUN go get go get github.com/chai2010/pwdgen
+RUN go get github.com/chai2010/pwdgen
+
+# download etcd-v3.2.12
+RUN mkdir -p /etcd-download && cd /etcd-download \
+	&& curl -L https://github.com/coreos/etcd/releases/download/v3.2.12/etcd-v3.2.12-linux-amd64.tar.gz | tar zx
 
 # the protoc can't run on alpine,
 # we only need the protobuf's stdarnd library in the `/protoc/include`.
@@ -38,6 +41,10 @@ RUN apk add --no-cache \
 	hugo \
 	caddy \
 	imagemagick
+
+
+COPY --from=builder /etcd-download/etcd-v3.2.12-linux-amd64/etcd    /usr/local/bin/etcd
+COPY --from=builder /etcd-download/etcd-v3.2.12-linux-amd64/etcdctl /usr/local/bin/etcdctl
 
 COPY --from=builder /protoc/include /usr/local/include
 COPY --from=builder /go/bin /go/bin
