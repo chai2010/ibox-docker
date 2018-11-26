@@ -2,7 +2,7 @@
 # Use of this source code is governed by a Apache
 # license that can be found in the LICENSE file.
 
-FROM golang:1.11.2-alpine3.6 as builder
+FROM golang:1.11.2-alpine3.8 as builder
 
 RUN apk add --no-cache git curl openssl gcc
 
@@ -33,7 +33,7 @@ RUN mkdir -p /protoc && cd /protoc \
 	&& wget https://github.com/google/protobuf/releases/download/v3.5.0/protoc-3.5.0-linux-x86_64.zip \
 	&& unzip protoc-3.5.0-linux-x86_64.zip
 
-FROM golang:1.11.2-alpine3.6
+FROM golang:1.11.2-alpine3.8
 
 RUN apk add --no-cache \
 	git \
