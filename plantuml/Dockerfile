@@ -2,7 +2,7 @@ FROM frolvlad/alpine-oraclejdk8
 
 LABEL maintainer="chaishushan@gmil.com"
 
-ENV PLANTUML_VERSION=1.2018.0
+ENV PLANTUML_VERSION=1.2020.2
 
 RUN \
   apk add --no-cache graphviz wget ca-certificates && \
