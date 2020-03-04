@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-oraclejdk8
+FROM openjdk
 
 LABEL maintainer="chaishushan@gmil.com"
 
